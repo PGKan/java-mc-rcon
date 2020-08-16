@@ -1,0 +1,26 @@
+Usage: java -jar mc-rcon.jar [OPTION]... [-p <password>] [host] [port]
+Connect to an RCON server (localhost:25575 by default).
+Enable to execute command remotely.
+
+**WARNING**
+The RCON Protocol do not support encrypted connection.
+It is recommended to use mc-rcon on localhost via SSH connection.
+
+arguments:
+    -h, --help       show this list
+    -H, --no-head    stop printing initial heading information
+    -s, --silent     stop printing response message
+    -v, --verbose    print all debug information (override --silent)
+
+commands:
+
+Use prefix "" or "$remote:" for issuing remote command
+Use prefix "$" or "$local:" for issuing local command
+
+    $remote
+see https://minecraft.gamepedia.com/Commands#List_and_summary_of_commands for command list and descriptions
+    $local
+        exit         exit mc-rcon
+
+Source-Repository:
+    https://github.com/PGKan/java-mc-rcon

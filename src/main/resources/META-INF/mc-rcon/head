@@ -1,0 +1,8 @@
+Minecraft RCON Client [Version Dev-0.1.0]
+By PGKan licensed for CC BY-NC 4.0
+More information at https://github.com/PGKan/java-mc-rcon
+
+**WARNING**
+The RCON Protocol do not support encrypted connection.
+It is recommended to use mc-rcon on localhost via SSH connection.
+
