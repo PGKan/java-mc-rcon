@@ -4,6 +4,8 @@
  */
 package org.pgstyle.mcrcon;
 
+import java.io.IOException;
+
 import org.pgstyle.mcrcon.protocol.Session;
 
 /**
@@ -30,7 +32,7 @@ public class RemoteController {
 
     public static boolean prompt() {
         while (RemoteController.session != null && RemoteController.session.isAlive()) {
-            RconUtils.say(null, ":");
+            RconUtils.say(null, ": ");
 
             String command = System.console().readLine().trim();
             if (command.length() > 0) {
@@ -60,8 +62,15 @@ public class RemoteController {
                 }
             }
         }
-        RconUtils.say(null, "Connection closed%n");
-        return true;
+
+        if (RemoteController.session == null) {
+            RconUtils.err(null, "Connection failed%n");
+            return false;
+        }
+        else {
+            RconUtils.say(null, "Connection closed%n");
+            return true;
+        }
     }
 
     public static boolean session(String host, int port, String password) {
@@ -69,27 +78,46 @@ public class RemoteController {
         if (RemoteController.session != null) {
             boolean autenticated = false;
             if (password != null) {
-                autenticated = RemoteController.session.authenticate(password);
-            }
-            else {
-                for (int i = 0; !autenticated && i < 3; i++) {
-                    RconUtils.say(null, "Input password...%n:");
-                    autenticated = RemoteController.session.authenticate(new String(System.console().readPassword()));
-                    if (!autenticated) {
-                        RconUtils.say(null, "Authentication failed, please try again%n");
-                    }
-                    else {
-                        RconUtils.say(null, "Authentication finished%n");
-                    }
+                RconUtils.verbose(RemoteController.UCI, "Found preloaded password, use preloaded password instead of prompting for input%n");
+                try {
+                    autenticated = RemoteController.session.authenticate(password);
+                }
+                catch (IOException e) {
+                    brokenSession();
+                    return true;
+                }
+                if (!autenticated) {
+                    RconUtils.verbose(RemoteController.UCI, "Authentication failed, prompt for password input%n");
                 }
             }
+            for (int i = 0; !autenticated && i < 3; i++) {
+                RconUtils.say(null, "Input password...%n: ");
+                try {
+                    autenticated = RemoteController.session.authenticate(new String(System.console().readPassword()));
+                }
+                catch (IOException e) {
+                    brokenSession();
+                    return true;
+                }
+                if (!autenticated) {
+                    RconUtils.say(null, "Authentication failed, please try again%n");
+                }
+                else {
+                    RconUtils.say(null, "Authentication finished%n");
+                }
+            }
+
             return autenticated;
         }
         else {
-            RconUtils.err(null, "Connection failed");
-            System.exit(2);
-            return false;
+            RconUtils.err(null, "Connection failed%");
+            return true;
         }
+    }
+
+    private static void brokenSession() {
+        RconUtils.verbose(RemoteController.UCI, "Connection is dead, not continue session%n");
+        RemoteController.session = null;
     }
 
     public static void setSilent(boolean silent) {

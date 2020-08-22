@@ -28,11 +28,11 @@ public class Packet {
     }
 
     public Packet(InputStream inputStream) throws IOException {
-        int length = RconUtils.readInt(inputStream, false, 1000);
-        this.id = RconUtils.readInt(inputStream, false, 1000);
-        this.type = PacketType.decode(RconUtils.readInt(inputStream, false, 1000), true);
-        this.body = length > 10 ? RconUtils.readString(inputStream, length - 10, 1000) : "";
-        RconUtils.readTerminater(inputStream, 1000);
+        int length = RconUtils.readInt(inputStream, false, 3000);
+        this.id = RconUtils.readInt(inputStream, false, 500);
+        this.type = PacketType.decode(RconUtils.readInt(inputStream, false, 500), true);
+        this.body = length > 10 ? RconUtils.readString(inputStream, length - 10, 500) : "";
+        RconUtils.readTerminater(inputStream, 500);
     }
 
     private final int        id;

@@ -54,7 +54,7 @@ public class MinecraftRemoteControl {
         RemoteController.setVerbose(MinecraftRemoteControl.verbose);
 
         if (!RemoteController.session(MinecraftRemoteControl.host != null ? MinecraftRemoteControl.host : "localhost", MinecraftRemoteControl.port, password)) {
-            RconUtils.put(null, "Authentication failed%n");
+            RconUtils.err(null, "Authentication failed%n");
             System.exit(MinecraftRemoteControl.EXIT_AUTH);
         }
         if (RemoteController.prompt()) {

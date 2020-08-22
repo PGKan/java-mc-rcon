@@ -44,15 +44,29 @@ public class Session implements Closeable {
 
     private Session(Socket socket) {
         this.connection = socket;
+        this.authenticated = false;
     }
 
     private final Socket connection;
+    private boolean      authenticated;
 
-    public boolean authenticate(String password) {
-        RconUtils.verbose(Session.UCI, "Authenticating...");
-        boolean success = !this.request(new Packet(PacketType.SERVERDATA_AUTH, password)).isAuthError();
-        RconUtils.verbose(null, "%s%n", success ? "success" : "failed");
-        return success;
+    public boolean authenticate(String password) throws IOException {
+        if (this.authenticated) {
+            throw new IllegalStateException("already authenticated");
+        }
+        else if (this.isAlive()) {
+            RconUtils.verbose(Session.UCI, "Authenticating...%n");
+            Packet request = new Packet(PacketType.SERVERDATA_AUTH, password);
+            Packet response = this.request(request);
+            this.authenticated = response.getType().equals(PacketType.SERVERDATA_AUTH_RESPONSE) &&
+                request.match(response) && !response.isAuthError();
+            RconUtils.verbose(null, "Authentication %s%n", this.authenticated ? "success" : "failed");
+            return this.authenticated;
+        }
+        else {
+            RconUtils.err(null, "Connection is dead%n");
+            throw new IOException("connection died");
+        }
     }
 
     @Override
@@ -64,38 +78,29 @@ public class Session implements Closeable {
     }
 
     public String execute(String command) {
-        Packet response = this.request(new Packet(PacketType.SERVERDATA_EXECCOMMAND, command));
+        Packet request = new Packet(PacketType.SERVERDATA_EXECCOMMAND, command);
+        Packet response = this.request(request);
         return response != null ? response.getBody() : null;
     }
 
     public boolean isAlive() {
-        try {
-            if (this.connection.isConnected() && !this.connection.isClosed()) {
-                this.connection.getOutputStream().write(new byte[] { 10, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0 });
-                RconUtils.readString(this.connection.getInputStream(), RconUtils.readInt(this.connection.getInputStream(), false, 500), 500);
-            }
-            return true;
+        if (this.connection.isConnected() && !this.connection.isClosed()) {
+            return this.empty() != null;
         }
-        catch (IOException e) {
-            RconUtils.verbose(null, "died%n");
-            return false;
-        }
+        return false;
+    }
+
+    public String empty() {
+        Packet response = this.request(new Packet(PacketType.NULL, null));
+        return String.format("%08x;%s;%s", response.getId(), response.getType().name(), response.getBody());
     }
 
     private Packet request(Packet packet) {
-        if (!this.isAlive()) {
-            return null;
-        }
         try {
             this.connection.getOutputStream().write(packet.getBytes());
             return new Packet(this.connection.getInputStream());
         }
         catch (IOException e) {
-            RconUtils.verbose(Session.UCI, "Error occurred, clossing session...%n");
-            try {
-                this.connection.close();
-            }
-            catch (IOException ne) {}
             return null;
         }
     }

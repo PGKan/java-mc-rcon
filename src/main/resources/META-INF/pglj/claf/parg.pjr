@@ -1,0 +1,63 @@
+/** PJS/1.0;PJR **/
+{
+    "#psj": {
+        "#version": "1.0",
+        "#definition": "#psj:pglj/parg.psj",
+        "#namespace": "#default"
+    },
+    "#h": [
+        "SCHEMA_CHECK:TRUE"
+    ],
+    "parg": {
+        "options": [
+            {
+                "name": "Help",
+                "short": ["h"],
+                "long": ["help"],
+                "type": "Flag",
+                "description": "show this list"
+            },
+            {
+                "name": "NoHeader",
+                "short": ["H"],
+                "long": ["no-head"],
+                "type": "Flag",
+                "description": "stop printing initial heading information"
+            },
+            {
+                "name": "Password",
+                "short": ["p"],
+                "long": ["password"],
+                "type": "String",
+                "description": "authenticate with the password given in the argument first before prompt for password input"
+            },
+            {
+                "name": "Silent",
+                "short": ["s"],
+                "long": ["silent"],
+                "type": "Flag",
+                "description": "stop printing response message"
+            },
+            {
+                "name": "Verbose",
+                "short": ["v"],
+                "long": ["verbose"],
+                "type": "Flag",
+                "description": "print all debug information (override --silent)"
+            }
+        ]
+        ,
+        "arguments": [
+            {
+                "name": "Host",
+                "type": "String",
+                "description": "the host machine mc-rcon will connect to"
+            },
+            {
+                "name": "Port",
+                "type": "Integer",
+                "description": "the port number of connection will create on"
+            }
+        ]
+    }
+}

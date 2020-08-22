@@ -15,6 +15,7 @@ public enum PacketType {
     SERVERDATA_AUTH_RESPONSE(2, false, true),
     SERVERDATA_EXECCOMMAND(2, true, false),
     SERVERDATA_RESPONSE_VALUE(0, false, true),
+    NULL(0, false, false),
     UNKNOWN(-1, false, false);
 
     private final int     value;
