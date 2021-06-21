@@ -1,0 +1,127 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.pgstyle.standalone.tool</groupId>
+    <artifactId>mc-rcon</artifactId>
+    <version>Dev-0.0.1</version>
+    <packaging>jar</packaging>
+    <name>minecraft-rcon</name>
+    <description>A standalone Java application for using RCON feature of a Minecraft server.</description>
+    <url>https://github.com/PGKan/java-mc-rcon</url>
+
+    <properties>
+        <!-- Project Configs -->
+        <encoding>UTF-8</encoding>
+        <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+        <project.resources.sourceEncoding>${encoding}</project.resources.sourceEncoding>
+        <jre.version>1.8</jre.version>
+        <maven.compiler.target>${jre.version}</maven.compiler.target>
+        <maven.compiler.source>${jre.version}</maven.compiler.source>
+
+        <!-- Dependency Configs -->
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+
+        <plugins>
+
+            <!-- Maven Jar Generator -->
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <pomPropertiesFile></pomPropertiesFile>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                        <manifestEntries>
+                            <build-jdk>${jre.version}</build-jdk>
+                            <Source-Repository>${project.url}</Source-Repository>
+                        </manifestEntries>
+                        <manifest>
+                            <packageName>${project.artifactId}</packageName>
+                            <mainClass>org.pgstyle.mcrcon.MinecraftRemoteControl</mainClass>
+                            <addClasspath>false</addClasspath>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>standalone-build</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Maven Javadoc Generator -->
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <pomPropertiesFile></pomPropertiesFile>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                        <manifestEntries>
+                            <build-jdk>${jre.version}</build-jdk>
+                            <Source-Repository>${project.url}</Source-Repository>
+                        </manifestEntries>
+                        <manifest>
+                            <addClasspath>false</addClasspath>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <doclint>missing</doclint>
+                            <doclint>reference</doclint>
+                            <doclint>syntax</doclint>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Maven Source Generator -->
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <pomPropertiesFile></pomPropertiesFile>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                        <manifestEntries>
+                            <build-jdk>${jre.version}</build-jdk>
+                            <Source-Repository>${project.url}</Source-Repository>
+                        </manifestEntries>
+                        <manifest>
+                            <addClasspath>false</addClasspath>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

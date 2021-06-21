@@ -1,0 +1,3 @@
+**WARNING**
+The RCON Protocol do not support encrypted connection.
+It is recommended to use mc-rcon on localhost via SSH connection.
