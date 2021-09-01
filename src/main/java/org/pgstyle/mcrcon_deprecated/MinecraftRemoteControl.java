@@ -2,12 +2,12 @@
  * Stable: TODO WIP
  * Document: TODO document needed
  */
-package org.pgstyle.mcrcon;
+package org.pgstyle.mcrcon_deprecated;
 
 import java.io.IOException;
 
-import org.pgstyle.mcrcon.console.ConsoleForegroundColour;
-import org.pgstyle.mcrcon.console.ConsoleFormat;
+import org.pgstyle.mcrcon_deprecated.console.ConsoleForegroundColour;
+import org.pgstyle.mcrcon_deprecated.console.ConsoleFormat;
 
 /**
  * @since since
@@ -47,7 +47,7 @@ public class MinecraftRemoteControl {
         if (!MinecraftRemoteControl.noHead) {
             try {
                 RconUtils.put(null, new String(RconUtils.read(RconUtils.class.getResourceAsStream("/META-INF/mc-rcon/head")), RconUtils.UTF8));
-                RconUtils.put(null, "\u001b[1m" + ConsoleForegroundColour.of256Colour(9).apply(new String(RconUtils.read(RconUtils.class.getResourceAsStream("/META-INF/mc-rcon/secure-warning")), RconUtils.UTF8)));
+                RconUtils.put(null, "\u001b[1m" + ConsoleForegroundColour.of256Colour(9).apply(new String(RconUtils.read(RconUtils.class.getResourceAsStream("/META-INF/mc-rcon/security-warning")), RconUtils.UTF8)));
             }
             catch (IOException e) {
                 RconUtils.err(null, e.getMessage());

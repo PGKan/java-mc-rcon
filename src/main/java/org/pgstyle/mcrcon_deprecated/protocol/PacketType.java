@@ -2,7 +2,7 @@
  * Stable: TODO WIP
  * Document: TODO document needed
  */
-package org.pgstyle.mcrcon.protocol;
+package org.pgstyle.mcrcon_deprecated.protocol;
 
 /**
  * @since since

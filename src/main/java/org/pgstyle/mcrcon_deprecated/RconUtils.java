@@ -2,7 +2,7 @@
  * Stable: TODO WIP
  * Document: TODO document needed
  */
-package org.pgstyle.mcrcon;
+package org.pgstyle.mcrcon_deprecated;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

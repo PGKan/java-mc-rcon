@@ -1,4 +1,4 @@
-package org.pgstyle.mcrcon.console;
+package org.pgstyle.mcrcon_deprecated.console;
 
 public class ConsoleFormat {
     

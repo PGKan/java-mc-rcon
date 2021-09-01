@@ -1,4 +1,6 @@
 /** PJS/1.0;PJR **/
+// The MCRcon do not use the PGLib-CLI library currently, this CLAF definition is not used for now.
+// The command line application will switch to use the CLAF in later iteration.
 {
     "#psj": {
         "#version": "1.0",
@@ -51,11 +53,13 @@
             {
                 "name": "Host",
                 "type": "String",
+                "default": "localhost",
                 "description": "the host machine mc-rcon will connect to"
             },
             {
                 "name": "Port",
                 "type": "Integer",
+                "dependencies": ["host"]
                 "description": "the port number of connection will create on"
             }
         ]

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" strict="true" name="mcrcon" package="org.pgstyle.mcrcon">
+    <Properties>
+    </Properties>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="stdout"/>
+        </Root>
+        <Logger name="prompt" level="debug" additivity="false">
+            <AppenderRef ref="prompt" level="debug"/>
+        </Logger>
+        <Logger name="stdout" level="info"/>
+        <Logger name="master" additivity="false">
+            <AppenderRef ref="master" level="debug"/>
+        </Logger>
+        <Logger name="command" additivity="false">
+            <AppenderRef ref="command" level="info"/>
+        </Logger>
+    </Loggers>
+    <Appenders>
+        <Appender type="Console" name="prompt">
+            <Layout type="PatternLayout" pattern="%highlight{%m}{FATAL=Magenta, ERROR=Red, WARN=Yellow, INFO=Normal, DEBUG=Normal}" disableAnsi="false"/>
+        </Appender>
+        <Appender type="Console" name="stdout">
+            <Layout type="PatternLayout" pattern="%highlight{%m%n}{FATAL=Magenta, ERROR=Red, WARN=Yellow, INFO=Normal, DEBUG=Normal}" disableAnsi="false"/>
+        </Appender>
+        <Appender type="RollingFile" name="master"
+                  fileName="./mcrcon-log/master.log"
+                  filePattern="./mcrcon-log/master.%d-%i.log.gz">
+            <Layout type="PatternLayout" pattern="[%d{yyyy-MM-dd HH:mm:ssZ}] %-5p %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="24" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="14"/>
+        </Appender>
+        <Appender type="RollingFile" name="command"
+                  fileName="./mcrcon-log/command.log"
+                  filePattern="./mcrcon-log/command.%d-%i.log.gz">
+            <Layout type="PatternLayout" pattern="%m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="24" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="14"/>
+        </Appender>
+    </Appenders>
+</Configuration>

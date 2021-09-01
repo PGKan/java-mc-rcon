@@ -1,4 +1,5 @@
-Usage: java -jar mc-rcon.jar [OPTION]... [-p <password>] [host] [port]
+Usage: <Java Command> [OPTION]... [-p <password>] [host]
+    or <Java Command> [OPTION]... [-p <password>] <host> [port]
 Connect to an RCON server (localhost:25575 by default).
 Enable to execute command remotely.
 

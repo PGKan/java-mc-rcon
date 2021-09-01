@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.pgstyle.standalone.tool</groupId>
     <artifactId>mc-rcon</artifactId>
-    <version>Dev-0.0.1</version>
+    <version>Dev-0.2.0</version>
     <packaging>jar</packaging>
     <name>minecraft-rcon</name>
     <description>A standalone Java application for using RCON feature of a Minecraft server.</description>
@@ -48,7 +48,8 @@
                         </manifestEntries>
                         <manifest>
                             <packageName>${project.artifactId}</packageName>
-                            <mainClass>org.pgstyle.mcrcon.MinecraftRemoteControl</mainClass>
+                            <mainClass>org.pgstyle.reworked.console.Console</mainClass>
+                            <!-- <mainClass>org.pgstyle.mcrcon.MinecraftRemoteControl</mainClass> -->
                             <addClasspath>false</addClasspath>
                         </manifest>
                     </archive>

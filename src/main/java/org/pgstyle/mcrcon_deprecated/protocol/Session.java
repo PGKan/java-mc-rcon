@@ -2,13 +2,13 @@
  * Stable: TODO WIP
  * Document: TODO document needed
  */
-package org.pgstyle.mcrcon.protocol;
+package org.pgstyle.mcrcon_deprecated.protocol;
 
 import java.io.Closeable;
 import java.io.IOException;
 import java.net.Socket;
 
-import org.pgstyle.mcrcon.RconUtils;
+import org.pgstyle.mcrcon_deprecated.RconUtils;
 
 /**
  * @since since

@@ -1,4 +1,6 @@
 /** PJS/1.0;PJR **/
+// The MCRcon do not use the PGLib-CLI library currently, this CLAF definition is not used for now.
+// The command line application will switch to use the CLAF in later iteration.
 {
     "#psj": {
         "#version": "1.0",
@@ -10,14 +12,14 @@
     ],
     "help": {
         "usages": [
-            "java -jar mc-rcon.jar [OPTION]... [-p <password>] [host]",
-            "java -jar mc-rcon.jar [OPTION]... [-p <password>] <host> [port]"
+            "<Java Command> [OPTION]... [-p <password>] [host]",
+            "<Java Command> [OPTION]... [-p <password>] <host> [port]"
         ],
-        "descriptions": "Connect to an RCON server (localhost:25575 by default).\nEnable to execute command remotely.\n\n**WARNING**\nThe RCON Protocol do not support encrypted connection.\nIt is recommended to use mc-rcon on localhost via SSH connection.",
+        "descriptions": "Connect to an RCON server (localhost:25575 by default).%nEnable to execute command remotely.%n%n**WARNING**%nThe RCON Protocol do not support encrypted connection.%nIt is recommended to use mc-rcon on localhost via SSH connection.",
         "documents": [
             {
                 "title": "commands:",
-                "contents": "Use prefix \"\" or \"$remote:\" for issuing remote command\nUse prefix \"$\" or \"$local:\" for issuing local command\n\t$remote\nsee https://minecraft.gamepedia.com/Commands#List_and_summary_of_commands for command list and descriptions\n\t$local\n\texit    exit mc-rcon"
+                "contents": "Use prefix \"\" or \"$remote:\" for issuing remote command%nUse prefix \"$\" or \"$local:\" for issuing local command%n\t$remote%nsee https://minecraft.gamepedia.com/Commands#List_and_summary_of_commands for command list and descriptions%n\t$local%n\texit    exit mc-rcon"
             },
             {
                 "title": "Source-Repository:",

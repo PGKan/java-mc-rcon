@@ -1,0 +1,14 @@
+Minecraft RCON Client
+Commands documentation
+
+Use prefix "" or "$remote:" for issuing remote command
+Use prefix "$" or "$local:" for issuing local command
+
+    $remote
+see https://minecraft.gamepedia.com/Commands#List_and_summary_of_commands for command list and descriptions
+
+    $local
+        exec         execute a command
+        exit         exit mc-rcon
+        help         show this list
+        remote       push and execute a command on the RCON server
